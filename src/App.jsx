@@ -1,6 +1,7 @@
 import { Routes,Route } from 'react-router-dom'
 import HomePage from './Pages/HomePage'
 import AboutUs from './Pages/AboutUsPage'
+import NotFound from './Pages/NotFound'
 function App() {
 
   return (
@@ -8,7 +9,7 @@ function App() {
       <Routes>
         <Route path='/' element = {<HomePage/>} />
          <Route path='/aboutus' element={<AboutUs/>}/>
-      
+        <Route path='*' element={<NotFound/>}/>
       </Routes>
       
     </div>
