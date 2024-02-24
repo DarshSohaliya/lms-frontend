@@ -2,7 +2,9 @@ import { Routes,Route } from 'react-router-dom'
 import HomePage from './Pages/HomePage'
 import AboutUs from './Pages/AboutUsPage'
 import NotFound from './Pages/NotFound'
+import Login from './Pages/LoginPage'
 import Signup from './Pages/Signup'
+
 function App() {
 
   return (
@@ -12,6 +14,7 @@ function App() {
          <Route path='/aboutus' element={<AboutUs/>}/>
         <Route path='*' element={<NotFound/>}/>
         <Route path='/signup' element={<Signup/>}/>
+        <Route path='/login' element={<Login/>}/>
       </Routes>
       
     </div>

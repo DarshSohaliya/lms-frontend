@@ -119,7 +119,7 @@ function Signup () {
              
             <div className="flex flex-col gap-1 ">
               <label htmlFor="fullName" className="font-semibold">Full Name</label>
-              <input type="text" required name='fullName' id = 'fullName' placeholder="Enter Your FullName" value={signupData.fullName} className="bg-transparent px-2 py-1 border" onChange={handleUserInput}/>
+              <input type="text" required name='fullName' id = 'fullName' placeholder="Enter Your FullName" value={signupData.fullName} className="bg-transparent px-2 py-1 border" onChange={handleUserInput} />
               </div>
             <div className="flex flex-col gap-1 ">
               <label htmlFor="email" className="font-semibold">Email</label>
