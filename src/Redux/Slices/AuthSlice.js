@@ -58,7 +58,7 @@ export const logout = createAsyncThunk("/auth/logout" ,async () => {
             success: (data) => {
                 return data?.data?.message
             },
-            error:"Failed to login"
+            error:"Failed to logout"
         })
         return (await res).data
     } catch (error) {
