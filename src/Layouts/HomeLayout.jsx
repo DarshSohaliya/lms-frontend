@@ -3,6 +3,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../Redux/Slices/AuthSlice';
 
 function HomeLayout({ children }) {
 
@@ -26,20 +27,21 @@ function HomeLayout({ children }) {
     drawerSide.style.left = '-100%';
   }
 
-  function handleLogout (e) {
+ async function handleLogout (e) {
      e.preventDefault()
 
-    //  const res = await dispath(logout())
+     const res = await dispath(logout())
 
-    // if (res?.payload?.success) {
+    if (res?.payload?.success) {
       navigate('/')
     }
-   
   
+  
+  }
 
   return (
     <div className="min-h-[90vh]">
-      <div className="drawer absolute left-0 z-50 w-fit">
+      <div className="drawer absolute left-0 z-50 w-fit  ">
         <input className="drawer-toggle" type="checkbox" id="my-drawer" />
         <div className="drawer-content">
           <label
@@ -53,7 +55,7 @@ function HomeLayout({ children }) {
             />
           </label>
         </div>
-        <div className="drawer-side w-fit" style={{ left: '-100%' }}>
+        <div className="drawer-side w-fit " style={{ left: '-100%' }}>
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-48 h-[100%] sm:w-80 bg-base-100 taex-base-content relative">
             <li className="w-fit absolute right-2 z-50">
@@ -81,11 +83,11 @@ function HomeLayout({ children }) {
             {!isLoggedIn && (
               <li className='absolute bottom-4 w-[90%] mt-4'>
                 <div className="w-full flex items-center justify-center">
-                    <button className='btn-primary px-4 py-1 font-semibold rounded-md w-full bg-yellow-500 '>
+                    <button className='btn-primary px-4 py-1 font-semibold rounded-md w-full bg-blue-600 '>
                         <Link to='/login'>Login</Link>
                     </button>
             
-                 <button className='btn-secondary px-4 py-1 font-semibold rounded-md w-full bg-yellow-500'>
+                 <button className='btn-secondary px-4 py-1 font-semibold rounded-md w-full bg-pink-600'>
                      <Link to='/signup'>Signup</Link>
                  </button>
                  </div>
@@ -95,11 +97,11 @@ function HomeLayout({ children }) {
                   {isLoggedIn && (
               <li className='absolute bottom-4 w-[90%]'>
                 <div className="w-full flex items-center justify-center">
-                    <button className='btn-primary px-4 py-1 font-semibold rounded-md w-full bg-yellow-500 '>
+                    <button className='btn-primary px-4 py-1 font-semibold rounded-md w-full bg-blue-600 '>
                         <Link to='/user/profile'>Profile</Link>
                     </button>
             
-                 <button className='btn-secondary px-4 py-1 font-semibold rounded-md w-full bg-yellow-500'>
+                 <button className='btn-secondary px-4 py-1 font-semibold rounded-md w-full bg-pink-600'>
                      <Link onClick={handleLogout}>Logout</Link>
                  </button>
                  </div>
