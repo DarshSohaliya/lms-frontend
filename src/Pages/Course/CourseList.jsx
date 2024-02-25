@@ -12,6 +12,7 @@ import CourseCard from "../../components/CourseCard";
 
     async function loadCourses() {
     await dispatch(getAllCourses())
+   
    }
 
     useEffect(() => {
