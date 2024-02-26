@@ -56,7 +56,7 @@ function Signup () {
    
     console.log(signupData);
 
-    if (!signupData.email || !signupData.password || !signupData.fullName  ) {
+    if (!signupData.email || !signupData.password || !signupData.fullName || !signupData.avatar ) {
       toast.error("Plese fill all the details")
       return;
     }
