@@ -50,29 +50,32 @@ function CreateCourse() {
  async function onFormSubmit (e) {
     e.preventDefault()
 
+     console.log(userInput);
     if(!userInput.title || !userInput.description || !userInput.category || !userInput.thumbnail || !userInput.createdBy){
       toast.error("All Field Are Required")
       return
     }
 
     const response = await dispatch(createNewCourse(userInput))
-       if (response?.payload?.success) {
-          setUserInput({
-            title:"",
-            category:"",
-            createdBy:"",
-            description:"",
-            thumbnail:null,
-            previewImage:""  
-          })
-       }
-    navigate('/courses')
+    console.log(response);
+       if (response?.payload?.success){
+         setUserInput({
+          title:"",
+          category:"",
+          createdBy:"",
+          description:"",
+          thumbnail:null,
+          previewImage:""  
+        })
+        navigate("/courses")
+      }
+   
   }
 
   return (
     <HomeLayout>
       <div className="flex items-center justify-center h-[100vh]">
-      <form on Submit={onFormSubmit} className="flex flex-col justify-center gap-5 rounded-lg p-4 text-white w-[700px] my-10 shadow-[0_0_10px_black] relative">
+      <form onSubmit={onFormSubmit} className="flex flex-col justify-center gap-5 rounded-lg p-4 text-white w-[700px] my-10 shadow-[0_0_10px_black] relative">
 
          <Link className='absolute top-8  text-2xl link text-accent cursor-pointer'>
           <AiOutlineArrowLeft/>

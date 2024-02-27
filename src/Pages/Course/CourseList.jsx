@@ -8,7 +8,7 @@ import CourseCard from "../../components/CourseCard";
  function CourseList () {
     const dispatch = useDispatch()
     console.log("sfdfaf");
-    const courseData = useSelector((state) => state.courses);
+    const {courseData} = useSelector((state) => state.course);
 
     async function loadCourses() {
     await dispatch(getAllCourses())

@@ -33,6 +33,7 @@ function Signup () {
         event.preventDefault()
 
         const uploadedImage = event.target.files[0]
+        console.log(uploadedImage);
 
         if (uploadedImage) {
           setSignupData({
@@ -43,14 +44,16 @@ function Signup () {
           const fileReader = new FileReader()
           fileReader.readAsDataURL(uploadedImage)
           fileReader.addEventListener('load',function () {
+            console.log("Image1",previewImage);
+
             setPreviewImage(this.result)
+            console.log("Image",previewImage);
             return
           })
 
 
         }
    }
-
    async function createNewAccount(event){
     event.preventDefault()
    
@@ -75,29 +78,26 @@ function Signup () {
       return
     }
     
-    // const formData = new FormData();
-    //     formData.append("fullName", signupData.fullName);
-    //     formData.append("email", signupData.email);
-    //     formData.append("password", signupData.password);
-    //     formData.append("avatar", signupData.avatar);
 
+    const formData = new FormData();
+    formData.append('fullName', signupData.fullName);
+    formData.append('email', signupData.email);
+    formData.append('password', signupData.password);
+    formData.append('avatar', signupData.avatar);
 
-
-   const response = await dispatch(createAccount(signupData))
-   console.log(response);
+   const response = await dispatch(createAccount(formData))
+   console.log("Form",response);
 
     if(response?.payload?.success)
       navigate('/')
      
-
-      
-
       setSignupData({
         fullName: "",
         email: "",
         password: "",
-        avatar:""
+        avatar:null
       })
+
       setPreviewImage("")
    }
 
