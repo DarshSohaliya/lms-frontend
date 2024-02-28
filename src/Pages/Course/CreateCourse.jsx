@@ -1,9 +1,9 @@
-import { useState } from "react"
+import React  ,{ useState } from "react"
 import toast from "react-hot-toast"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { createNewCourse } from "../../Redux/Slices/CourseSlice"
 import HomeLayout from "../../Layouts/HomeLayout"
+import { createNewCourse } from "../../Redux/Slices/CourseSlice"
 import { AiOutlineArrowLeft } from "react-icons/ai"
 import { Link } from "react-router-dom"
 
@@ -56,7 +56,15 @@ function CreateCourse() {
       return
     }
 
-    const response = await dispatch(createNewCourse(userInput))
+    let formData = new FormData();
+    formData.append("title", userInput?.title);
+    formData.append("description", userInput?.description);
+    formData.append("category", userInput?.category);
+    formData.append("createdBy", userInput?.createdBy);
+    formData.append("thumbnail", userInput?.thumbnail);
+
+    const response = await dispatch(createNewCourse(formData));
+
     console.log(response);
        if (response?.payload?.success){
          setUserInput({
