@@ -10,7 +10,7 @@ import { Link } from "react-router-dom"
 function CreateCourse() {
  
   const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const navigate  =useNavigate()
 
   const [userInput,setUserInput] = useState({
     title:"",
@@ -63,9 +63,11 @@ function CreateCourse() {
     formData.append("createdBy", userInput?.createdBy);
     formData.append("thumbnail", userInput?.thumbnail);
 
+   
     const response = await dispatch(createNewCourse(formData));
 
     console.log(response);
+    
        if (response?.payload?.success){
          setUserInput({
           title:"",
@@ -75,8 +77,13 @@ function CreateCourse() {
           thumbnail:null,
           previewImage:""  
         })
-        navigate("/courses")
+      //  try {
+        navigate("/courses");
+      //  } catch (error) {
+        console.log("ErRoR");
+      //  }
       }
+  
    
   }
 
