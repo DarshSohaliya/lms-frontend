@@ -25,7 +25,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/courses' element={<CourseList/>}/>
         <Route path='/contact' element={<Contact/>}/>
-        <Route path='/denied' element={<Denied/>}/>
+        <Route path="/denied" element={<Denied />} />
         <Route path='/course/description' element={<CourseDescription/>}/>
             
           <Route element={<RequireAuth allowedRole={["ADMIN"]}/>}>
