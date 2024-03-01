@@ -11,7 +11,8 @@ const initialState = {
 }
 export const getRazorPayId = createAsyncThunk('/razorpay/getId',async () => {
     try {
-         const  response = await axiosInstance.get('/payments/razorpay-key')
+         const  response = await axiosInstance.get('/payment/rezorpay-key')
+         console.log(response);
          return response.data
     } catch (error) {
         toast.error("Failed to load data")
@@ -20,16 +21,18 @@ export const getRazorPayId = createAsyncThunk('/razorpay/getId',async () => {
 
 export const purchaseCourseBundle = createAsyncThunk('/purchaseCourse',async () => {
     try {
-         const  response = await axiosInstance.post('/payments/subscribe')
+        const response = await axiosInstance.post('/payment/subscribe');
+         console.log(response);
          return response.data
     } catch (error) {
+        console.log("dh");
         toast.error(error?.response?.data?.message)
     }
 })
 
-export const verifyUserPayment = createAsyncThunk('/payments/verify',async (data) => {
+export const verifyUserPayment = createAsyncThunk('/payment/verify',async (data) => {
     try {
-         const  response = await axiosInstance.post('/payments/verify',{
+         const  response = await axiosInstance.post('/payment/verify',{
             razorpay_payment_id:data.razorpay_payment_id,
             razorpay_subscription_id:data.razorpay_subscription_id,
             razorpay_signature: data.razorpay_signature
@@ -40,9 +43,9 @@ export const verifyUserPayment = createAsyncThunk('/payments/verify',async (data
     }
 })
 
-export const getPaymentRecords = createAsyncThunk('/payments/record',async () => {
+export const getPaymentRecords = createAsyncThunk('/payment/record',async () => {
     try {
-         const  response =  axiosInstance.post('/payments?/count=100')
+         const  response =  axiosInstance.post('/payment?/count=100')
             toast.promise(response,{
                 loading:'Getting the payment records',
                 success:(data) => {
@@ -57,9 +60,9 @@ export const getPaymentRecords = createAsyncThunk('/payments/record',async () =>
     }
 })
 
-export const cancelSubscription = createAsyncThunk('/payments/cancel',async () => {
+export const cancelSubscription = createAsyncThunk('/payment/cancel',async () => {
     try {
-         const  response =  axiosInstance.post('/payments/unsubscribe')
+         const  response =  axiosInstance.post('/payment/unsubscribe')
             toast.promise(response,{
                 loading:'unsubscribeing the bundle',
                 success:(data) => {
@@ -87,10 +90,13 @@ const razorpaySlice =createSlice({
             state.subscription_id = action?.payload?.subscription_id
         })
         .addCase(verifyUserPayment.fulfilled,(state,action )=> {
+            console.log(action);
             toast.success(action?.payload?.message)
             state.isPaymentVerified = action?.payload?.success
         })
         .addCase(verifyUserPayment.rejected,(state,action )=> {
+            console.log(action);
+
             toast.success(action?.payload?.message)
             state.isPaymentVerified = action?.payload?.success
         })
