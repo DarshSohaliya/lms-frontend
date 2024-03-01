@@ -4,11 +4,12 @@ import axiosInstance from '../../Helpers/axiosInstance'
 const initialState = {
     key: "",
     subscription_id: "",
-    isPaymentVerified:false,
-    allPayments:{},
-    finamMonths:{},
-    monthlySalesRecord:[]
+    isPaymentVerified: false,
+    allPayments: {},
+    finamMonths: {},
+    monthlySalesRecord: []
 }
+
 export const getRazorPayId = createAsyncThunk('/razorpay/getId',async () => {
     try {
          const  response = await axiosInstance.get('/payment/rezorpay-key')
