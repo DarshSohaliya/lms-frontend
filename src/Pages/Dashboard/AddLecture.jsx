@@ -15,7 +15,7 @@ function AddLecture() {
     const [userInput , setUserInput]= useState({
         id:courseDetails?._id,
         lecture:undefined,
-        title:" ",
+        title:"",
         description: "",
         videoSrc: ""
     })

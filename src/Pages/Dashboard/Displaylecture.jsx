@@ -16,14 +16,16 @@ function Displaylecture(){
    async function onLectureDelete(courseId ,lectureId ) {
       console.log(courseId ,lectureId);
       await dispatch(deleteCourseLecture({courseId: courseId, lectureId: lectureId}))
-      await getCourseLectures(courseId)
+      await dispatch(getCourseLectures(courseId))
     }
-
+   
    useEffect(() => {
       console.log(state);
-         if (!state) 
-         {navigate("/")}
+         if (!state){
+            navigate("/courses")
+         }
          dispatch(getCourseLectures(state._id))
+        
    },[])
 
  
