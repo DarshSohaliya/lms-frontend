@@ -13,7 +13,6 @@ const initialState = {
 export const getRazorPayId = createAsyncThunk('/razorpay/getId',async () => {
     try {
          const  response = await axiosInstance.get('/payment/rezorpay-key')
-         console.log(response);
          return response.data
     } catch (error) {
         toast.error("Failed to load data")
@@ -23,7 +22,6 @@ export const getRazorPayId = createAsyncThunk('/razorpay/getId',async () => {
 export const purchaseCourseBundle = createAsyncThunk('/purchaseCourse',async () => {
     try {
         const response = await axiosInstance.post('/payment/subscribe');
-         console.log(response);
          return response.data
     } catch (error) {
         console.log("dh");
@@ -33,6 +31,7 @@ export const purchaseCourseBundle = createAsyncThunk('/purchaseCourse',async () 
 
 export const verifyUserPayment = createAsyncThunk('/payment/verify',async (data) => {
     try {
+        console.log(data);
          const  response = await axiosInstance.post('/payment/verify',{
             razorpay_payment_id:data.razorpay_payment_id,
             razorpay_subscription_id:data.razorpay_subscription_id,
@@ -46,7 +45,8 @@ export const verifyUserPayment = createAsyncThunk('/payment/verify',async (data)
 
 export const getPaymentRecords = createAsyncThunk('/payment/record',async () => {
     try {
-         const  response =  axiosInstance.post('/payment?/count=100')
+        console.log("sdhdu");
+         const  response =  axiosInstance.get('/payment?/count=100')
             toast.promise(response,{
                 loading:'Getting the payment records',
                 success:(data) => {
@@ -85,9 +85,11 @@ const razorpaySlice =createSlice({
     reducers:{},
     extraReducers:(builder) => {
         builder.addCase(getRazorPayId.fulfilled,(state,action) => {
+            console.log(action);
             state.key = action?.payload?.key
         })
         .addCase(purchaseCourseBundle.fulfilled,(state,action) => {
+            console.log(action);
             state.subscription_id = action?.payload?.subscription_id
         })
         .addCase(verifyUserPayment.fulfilled,(state,action )=> {
@@ -102,6 +104,7 @@ const razorpaySlice =createSlice({
             state.isPaymentVerified = action?.payload?.success
         })
         .addCase(getPaymentRecords.fulfilled,(state,action )=> {
+            console.log(action);
              state.allPayments = action?.payload?.allPayments
              state.finamMonths = action?.payload?.finamMonths
              state.monthlySalesRecord = action?.payload?.monthlySalesRecord

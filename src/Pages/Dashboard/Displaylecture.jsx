@@ -9,7 +9,8 @@ function Displaylecture(){
    const navigate = useNavigate()
    const dispatch = useDispatch()
    const {state} = useLocation()
-   const {lectures} = useSelector((state) => state.lecture)
+   const { lectures } = useSelector((state) => state.lecture);
+
    const {role} =useSelector((state) => state.auth);
    const [currentVideo, setCurrentVideo] = useState(0)
 
@@ -18,7 +19,7 @@ function Displaylecture(){
       await dispatch(deleteCourseLecture({courseId: courseId, lectureId: lectureId}))
       await dispatch(getCourseLectures(courseId))
     }
-   
+   console.log(lectures);
    useEffect(() => {
       console.log(state);
          if (!state){
@@ -74,7 +75,7 @@ function Displaylecture(){
                      <button onClick={() => onLectureDelete(state?._id,lecture?._id)} className="btn-accent bg-red-500 px-2 py-1 rounded-md font-semibold text-sm">
                        Delete lecture
                      </button>
-                  ) }
+                  ) }353988488714
                   </li>
                   
             )})}

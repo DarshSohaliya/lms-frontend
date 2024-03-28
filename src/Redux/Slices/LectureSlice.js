@@ -6,19 +6,19 @@ const initialState = {
     lectures:[]
 }
 
-export const getCourseLectures = createAsyncThunk('/course/lecture/get' , async (cid) => {
-      try {
-         const response = axiosInstance.get(`/courses/${cid}`)
-         toast.promise(response,{
-            loading:"Loading couse lecture",
-            success:"Lecture fetched successfully",
-            error:"failed to load lecture"
-         })
-         return (await response).data
-      } catch (error) {
-        toast.error(error?.response?.data?.message)
-      }
-})
+export const getCourseLectures = createAsyncThunk("/course/lecture/get", async (cid) => {
+  try {
+      const response =  axiosInstance.get(`/courses/${cid}`);
+      toast.promise(response, {
+          loading: "Fetching course lectures",
+          success: "Lectures fetched successfully",
+          error: "Failed to load the lectures"
+      });
+      return (await response).data;
+  } catch(error) {
+      toast.error(error?.response?.data?.message);
+  }
+});
 
 export const addCourseLecture = createAsyncThunk('/course/lecture/add' , async (data) => {
     try {
@@ -64,7 +64,7 @@ const lectureSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getCourseLectures.fulfilled,(state,action)=>{
           console.log(action);
-            state.lectures = action?.payload?.lectures 
+            state.lectures = action?.payload?.lectures
         })
         .addCase(addCourseLecture.fulfilled,(state,action) => {
           console.log(action);

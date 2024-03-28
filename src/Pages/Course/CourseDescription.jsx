@@ -20,16 +20,16 @@ function CourseDescription() {
                    </div>
                    <div className="space-y-4">
                    <div className="flex-col items-center justify-between text-xl  ">
-                        <p className="font+font-semibold">
+                        <p className="font-semibold">
                             
                             <span>
-                                Total Lectures :
-                                {state?.numberOfLectures}
+                                Total Lectures : {" "}
+                                {state?.numbersOfLecture}
                             </span>
                         </p>
-                        <p className="font+font-semibold">
+                        <p className="font-semibold">
                             <span>
-                                Instructor :
+                                Instructor :{" "}
                                 {state?.createdBy}
                             </span>
                         </p>

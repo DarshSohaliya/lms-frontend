@@ -15,21 +15,20 @@ function Checkout () {
     const subscription_id = useSelector((state) => state?.razorpay?.subscription_id)
     const userData = useSelector((state) => state?.auth?.data)
     const isPaymentVerified = useSelector((state) => state?.auth?.isPaymentVerified)
+
     const paymentDetails = {
         razorpay_payment_id:"",
         razorpay_subscription_id:"",
-        razorpay_signature: ""
+        razorpay_signature_id: ""
     }
- console.log(isPaymentVerified);
     async function handleSubscription (e) {
         e.preventDefault();
 
         if (!razorpayKey || ! subscription_id) {
              toast.error("Something went wrong")
-             return
+             return;
         }
-        console.log(razorpayKey);
-        const options = {
+            const options = {
             key: razorpayKey,
             subscription_id:subscription_id,
             name:"Coursify Pvt. Ltd",
@@ -42,31 +41,30 @@ function Checkout () {
               name: userData.fullName
             },
             handler: async function (response) {
+                console.log(response);
                 paymentDetails.razorpay_payment_id = response.razorpay_payment_id
                 paymentDetails.razorpay_signature = response.razorpay_signature
                 paymentDetails.razorpay_subscription_id = response.razorpay_subscription_id
 
 
-                toast.success("Payment successfull")
-
+                
                 const verifyresponse = await dispatch(verifyUserPayment(paymentDetails))
-                console.log(verifyresponse);
-                console.log(isPaymentVerified);
+                toast.success("Payment successfull")
+               console.log(verifyresponse);
 
                 (verifyresponse?.payload?.success) ? navigate('/checkout/success') : navigate('/checkout/fail')
 
             }
         }
-
+        console.log(options);
         const paymentObject = new window.Razorpay(options)
         paymentObject.open()
     }
  
      async function load() {
- const r1 = await dispatch(getRazorPayId())
- const r2 =  await dispatch(purchaseCourseBundle())
-      console.log(r1);
-      console.log(r2);
+      const r1 = await dispatch(getRazorPayId())
+      const r2 =  await dispatch(purchaseCourseBundle())
+      
 
      }
 

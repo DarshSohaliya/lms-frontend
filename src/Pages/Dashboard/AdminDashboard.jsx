@@ -18,16 +18,18 @@ function AdminDashboard() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const { allUserCount, subscribedCount } = useSelector((state) => state.stat)
-    const { allPayments, finalMonths, monthlySelesRecord } = useSelector((state) => state.razorpay)
     
+    const { allUserCount, subscribedCount } = useSelector((state) => state.stat)
+    const { allPayments, monthlySalesRecord } = useSelector((state) => state.razorpay)
+    
+    console.log(monthlySalesRecord);
     const userData = {
         labels : ["Registered User" , "Enrolled User"],
         fontColor:"white",
         datasets: [
             {
                 label:"User Details",
-                data: [10 , 15],
+                data: [allUserCount , subscribedCount],
                 backgroundColor: ["yellow" ,"green"],
                 borderWidth:1,
                 borderColor:["yellow","green"]
@@ -41,7 +43,7 @@ function AdminDashboard() {
         datasets: [
            {
             label:"Sales / Month",
-            data:monthlySelesRecord,
+            data:monthlySalesRecord,
             backgroundColor:["rgb(255,99,132)"],
             borderColor:["white"],
             borderWidth:2
@@ -50,13 +52,13 @@ function AdminDashboard() {
         ]
     }
 
-   const myCourses = useSelector((state) => state?.course?.courseData)
+   const myCourses = useSelector((state) => state?.courses?.courseData)
    
    async function onCourseDelete(id) {
               if (window.confirm("Are you sure you want to delete the course ?")) {
                 const res = await dispatch(deleteCourse(id))
                 
-                if (res?.payload) {
+                if (res?.payload?.success) {
                     await dispatch(getAllCourses())
                 }
               }
@@ -128,13 +130,13 @@ function AdminDashboard() {
                           <h1 className="text-center text-3xl font-semibold">
                             Courses Overview
                           </h1>
-                          <button className="w-fit bg-yellow-500 hover:bg-yellow-600 transition-all ease-in-out duration-300 rounded py-2 px-4 font-semibold text-lg cursor-pointer " onClick={() => navigate("/course/create")}>
+                          <button className="w-fit bg-yellow-500 hover:bg-yellow-600 transition-all ease-in-out duration-300 rounded py-2 px-4 font-semibold text-lg cursor-pointer " onClick={() =>{ navigate("/course/create")}}>
                            Create new course
                           </button>
                 </div>
                 <table className="table overflow-x-scroll ">
                     <thead>
-                        <tr>
+                        <tr className="text-white">
                             <th>Sr No</th>
                             <th>Course Title</th>
                             <th>Course Category</th>
